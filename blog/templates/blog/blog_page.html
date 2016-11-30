@@ -5,16 +5,28 @@
 {% block body_class %}template-blogpage{% endblock %}
 
 {% block content %}
-{{ page.title }}
+  <h3>{{ page.title }}</h3>
 
-{{ page.date }}
+  <h6>{{ page.date }}</h6>
 
+  <h4>
+    {% if page.main_image %}
+    {% image page.main_image width-500 %}
+    {% endif %}
+  </h4>
 
-{% if page.main_image %}
-{% image page.main_image width-500 %}
-{% endif %}
+  <h4>{{ page.intro }}</h4>
 
-{{ page.intro }}
+  <h4>{{ page.body|richtext }}</h4>
 
-{{ page.body|richtext }}
+  {% if self.get_ancestors|length > 1 %}
+    <div class="breadcrumb_page">
+        {% for page in self.get_ancestors %}
+            {% if page.is_root == False %}
+            <a class="breadcrumb" href='{% pageurl page %}'>{{ page.title }}</a>
+            {% endif %}
+        {% endfor %}
+    <span class="breadcrumb_active">{{ self.title }}</span>
+    </div>
+  {% endif %}
 {% endblock %}
