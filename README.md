@@ -1,2 +1,2 @@
 # wagtail
-My blog on http://wagtail.pp.ua
+Test site on http://wagtail.pp.ua
